@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "brands")
-public class Brand {
+@Table(name = "categories")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,18 +14,20 @@ public class Brand {
     private String name;
     @Column
     private String description;
-    @Column
-    private String country;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parentCategory")
+    private List<Category> childCategories;
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Category parentCategory;
+    @OneToMany(mappedBy = "category")
     private List<Bike> bikeList;
 
-    public Brand() {
+    public Category() {
     }
 
-    public Brand(String name, String description, String country) {
+    public Category(String name, String description) {
         this.name = name;
         this.description = description;
-        this.country = country;
     }
 
     public void setId(Long id) {
@@ -52,12 +54,20 @@ public class Brand {
         this.description = description;
     }
 
-    public String getCountry() {
-        return country;
+    public List<Category> getChildCategories() {
+        return childCategories;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setChildCategories(List<Category> childCategories) {
+        this.childCategories = childCategories;
+    }
+
+    public Category getParentCategory() {
+        return parentCategory;
+    }
+
+    public void setParentCategory(Category parentCategory) {
+        this.parentCategory = parentCategory;
     }
 
     public List<Bike> getBikeList() {
@@ -70,11 +80,11 @@ public class Brand {
 
     @Override
     public String toString() {
-        return "Brand{" +
+        return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", country='" + country + '\'' +
+                ", parentCategory=" + parentCategory +
                 '}';
     }
 }
