@@ -25,4 +25,12 @@ public class BikeService {
     public Bike findById(Long id) {
         return bikeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find bike with id=" + id));
     }
+
+    public List<Bike> findByBrandName(String brandName) {
+        return bikeRepository.findBikesByBrandName(brandName);
+    }
+
+    public List<Bike> findByCategoryAndYear(String categoryName, Integer year) {
+        return bikeRepository.findBikesByCategoryNameAndYear(categoryName, year);
+    }
 }

@@ -29,4 +29,13 @@ public class BikeController {
     public Bike getById(@PathVariable(value = "id")Long id){
         return bikeService.findById(id);
     }
+    @GetMapping("/brand/{brandName}")
+    public List<Bike> getByBrandName(@PathVariable(value = "brandName")String brandName){
+        return bikeService.findByBrandName(brandName);
+    }
+
+    @GetMapping("/category/{categoryName}/year/{year}")
+    public List<Bike> getBikeByCategoryAndYear(@PathVariable(value = "categoryName")String categoryName,@PathVariable(value = "year") Integer year){
+        return bikeService.findByCategoryAndYear(categoryName,year);
+    }
 }
