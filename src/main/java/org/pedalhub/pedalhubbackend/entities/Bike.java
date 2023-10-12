@@ -1,5 +1,6 @@
 package org.pedalhub.pedalhubbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.pedalhub.pedalhubbackend.entities.enums.bike.BrakesType;
 import org.pedalhub.pedalhubbackend.entities.enums.bike.FrameMaterial;
@@ -18,15 +19,14 @@ public class Bike {
     @Column
     private Double price;
     @Column
-    @Enumerated(EnumType.STRING)
-    private FrameMaterial frameMaterial;
+    private String frameMaterial;
     @Column
-    @Enumerated(EnumType.STRING)
-    private BrakesType brakesType;
+    private String brakesType;
     @Column
-    @Enumerated(EnumType.STRING)
-    private SuspensionType suspensionType;
-    @ManyToOne
+    private String suspensionType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JoinColumn(name="brand_id")
     private Brand brand;
     @ManyToOne
     private Category category;
@@ -36,7 +36,17 @@ public class Bike {
     public Bike() {
     }
 
-    public Bike(String name, Integer year, Double price, FrameMaterial frameMaterial, BrakesType brakesType, SuspensionType suspensionType, Groupset groupset) {
+/*    public Bike(String name, Integer year, Double price, FrameMaterial frameMaterial, BrakesType brakesType, SuspensionType suspensionType, Groupset groupset) {
+        this.name = name;
+        this.year = year;
+        this.price = price;
+        this.frameMaterial = frameMaterial;
+        this.brakesType = brakesType;
+        this.suspensionType = suspensionType;
+        this.groupset = groupset;
+    }*/
+
+    public Bike(String name, Integer year, Double price, String frameMaterial, String brakesType, String suspensionType, Groupset groupset) {
         this.name = name;
         this.year = year;
         this.price = price;
@@ -78,30 +88,6 @@ public class Bike {
         this.price = price;
     }
 
-    public FrameMaterial getFrameMaterial() {
-        return frameMaterial;
-    }
-
-    public void setFrameMaterial(FrameMaterial frameMaterial) {
-        this.frameMaterial = frameMaterial;
-    }
-
-    public BrakesType getBrakesType() {
-        return brakesType;
-    }
-
-    public void setBrakesType(BrakesType brakesType) {
-        this.brakesType = brakesType;
-    }
-
-    public SuspensionType getSuspensionType() {
-        return suspensionType;
-    }
-
-    public void setSuspensionType(SuspensionType suspensionType) {
-        this.suspensionType = suspensionType;
-    }
-
     public Brand getBrand() {
         return brand;
     }
@@ -126,5 +112,27 @@ public class Bike {
         this.groupset = groupset;
     }
 
+    public String getFrameMaterial() {
+        return frameMaterial;
+    }
 
+    public void setFrameMaterial(String frameMaterial) {
+        this.frameMaterial = frameMaterial;
+    }
+
+    public String getBrakesType() {
+        return brakesType;
+    }
+
+    public void setBrakesType(String brakesType) {
+        this.brakesType = brakesType;
+    }
+
+    public String getSuspensionType() {
+        return suspensionType;
+    }
+
+    public void setSuspensionType(String suspensionType) {
+        this.suspensionType = suspensionType;
+    }
 }

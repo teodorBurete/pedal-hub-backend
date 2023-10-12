@@ -14,16 +14,14 @@ public class Groupset {
     @Column
     private String name;
     @Column
-    @Enumerated(EnumType.STRING)
-    private GroupsetMake make;
+    private String make;
     @Column
-    @Enumerated(EnumType.STRING)
-    private GroupsetType type;
+    private String type;
 
     public Groupset() {
     }
 
-    public Groupset(String name, GroupsetMake make, GroupsetType type) {
+    public Groupset(String name, String make, String type) {
         this.name = name;
         this.make = make;
         this.type = type;
@@ -45,19 +43,19 @@ public class Groupset {
         this.name = name;
     }
 
-    public GroupsetMake getMake() {
+    public String getMake() {
         return make;
     }
 
-    public void setMake(GroupsetMake make) {
+    public void setMake(String make) {
         this.make = make;
     }
 
-    public GroupsetType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(GroupsetType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

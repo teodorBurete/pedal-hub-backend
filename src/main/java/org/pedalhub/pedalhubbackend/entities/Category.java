@@ -1,5 +1,7 @@
 package org.pedalhub.pedalhubbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -14,11 +16,12 @@ public class Category {
     private String name;
     @Column
     private String description;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "parentCategory")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parentCategory")
     private List<Category> childCategories;
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private Category parentCategory;
+    @JsonBackReference
     @OneToMany(mappedBy = "category")
     private List<Bike> bikeList;
 
@@ -84,7 +87,6 @@ public class Category {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", parentCategory=" + parentCategory +
                 '}';
     }
 }

@@ -19,7 +19,7 @@ public class BikeController {
         this.bikeService = bikeService;
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<Bike> findAll() {
         return bikeService.findAll();
     }

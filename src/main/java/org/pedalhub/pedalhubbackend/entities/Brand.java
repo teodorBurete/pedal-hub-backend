@@ -1,5 +1,6 @@
 package org.pedalhub.pedalhubbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,8 +17,9 @@ public class Brand {
     private String description;
     @Column
     private String country;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
-    private List<Bike> bikeList;
+    //@JsonManagedReference
+   /* @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
+    private List<Bike> bikeList;*/
 
     public Brand() {
     }
@@ -60,13 +62,13 @@ public class Brand {
         this.country = country;
     }
 
-    public List<Bike> getBikeList() {
+ /*   public List<Bike> getBikeList() {
         return bikeList;
     }
 
     public void setBikeList(List<Bike> bikeList) {
         this.bikeList = bikeList;
-    }
+    }*/
 
     @Override
     public String toString() {
