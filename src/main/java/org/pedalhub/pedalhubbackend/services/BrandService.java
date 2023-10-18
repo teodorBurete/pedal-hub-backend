@@ -1,5 +1,6 @@
 package org.pedalhub.pedalhubbackend.services;
 
+import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.Brand;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.BrandRepository;
@@ -12,10 +13,12 @@ import java.util.List;
 public class BrandService {
 
     private BrandRepository brandRepository;
+    private ModelMapper modelMapper;
 
     @Autowired
-    public BrandService(BrandRepository brandRepository) {
+    public BrandService(BrandRepository brandRepository, ModelMapper modelMapper) {
         this.brandRepository = brandRepository;
+        this.modelMapper = modelMapper;
     }
 
     public List<Brand> findAll() {
