@@ -23,4 +23,7 @@ public class BrandDto {
     public void setName(String name) {
         this.name = name;
     }
+
+    public BrandDto() {
+    }
 }
