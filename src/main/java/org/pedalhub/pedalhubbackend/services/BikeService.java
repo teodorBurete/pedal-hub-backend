@@ -41,7 +41,7 @@ public class BikeService {
         return bikeRepository.findBikesByCategoryNameAndYear(categoryName, year);
     }
 
-    public Bike add(BikeDto bikeDto) {
+  /*  public Bike add(BikeDto bikeDto) {
 
         Bike newBike = new Bike();
 
@@ -56,5 +56,5 @@ public class BikeService {
         newBike.setSuspensionType(bikeDto.getSuspensionType());
 
         return bikeRepository.save(newBike);
-    }
+    }*/
 }
