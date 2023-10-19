@@ -2,7 +2,7 @@ package org.pedalhub.pedalhubbackend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.Brand;
-import org.pedalhub.pedalhubbackend.entities.dto.BrandDto;
+import org.pedalhub.pedalhubbackend.entities.dto.brabddto.BrandDto;
 import org.pedalhub.pedalhubbackend.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,4 +1,4 @@
-package org.pedalhub.pedalhubbackend.entities.dto;
+package org.pedalhub.pedalhubbackend.entities.dto.brabddto;
 public class BrandDto {
     private Long id;
     private String name;

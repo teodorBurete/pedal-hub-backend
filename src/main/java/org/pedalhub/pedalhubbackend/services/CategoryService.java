@@ -5,6 +5,8 @@ import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
 
@@ -17,5 +19,9 @@ public class CategoryService {
     public Category findById(Long categoryId) {
         return categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Could not find category with id=" + categoryId));
 
+    }
+
+    public List<Category> findAll() {
+        return categoryRepository.findAll();
     }
 }

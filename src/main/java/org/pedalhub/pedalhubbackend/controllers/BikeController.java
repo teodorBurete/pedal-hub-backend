@@ -2,10 +2,12 @@ package org.pedalhub.pedalhubbackend.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.Bike;
-import org.pedalhub.pedalhubbackend.entities.dto.BikeDto;
-import org.pedalhub.pedalhubbackend.entities.dto.BikeResponse;
+import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeDto;
+import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
+import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeResponse;
 import org.pedalhub.pedalhubbackend.services.BikeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,9 +48,8 @@ public class BikeController {
     }
 
     @PostMapping
-    public Bike addBike(@RequestBody BikeDto bikeDto) {
-        //  return bikeService.add(bikeDto);
-        return null;
+    public Bike addBike(@RequestBody BikeRequest bikeRequest) throws MethodArgumentNotValidException, NoSuchMethodException {
+        return bikeService.add(bikeRequest);
     }
 
     private BikeDto convertToDto(Bike bike) {

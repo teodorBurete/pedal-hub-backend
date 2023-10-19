@@ -1,4 +1,4 @@
-package org.pedalhub.pedalhubbackend.entities.dto;
+package org.pedalhub.pedalhubbackend.entities.dto.bikedto;
 
 public class BikeDto {
 

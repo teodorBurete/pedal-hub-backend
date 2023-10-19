@@ -1,11 +1,16 @@
 package org.pedalhub.pedalhubbackend.services;
 
 import org.pedalhub.pedalhubbackend.entities.Bike;
-import org.pedalhub.pedalhubbackend.entities.dto.BikeDto;
+import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.BikeRepository;
+import org.pedalhub.pedalhubbackend.utils.validators.BikeRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 
@@ -16,13 +21,17 @@ public class BikeService {
     private BrandService brandService;
     private CategoryService categoryService;
     private GroupsetService groupsetService;
+    private BikeRequestValidator bikeRequestValidator;
 
     @Autowired
-    public BikeService(BikeRepository bikeRepository, BrandService brandService, CategoryService categoryService, GroupsetService groupsetService) {
+    public BikeService(BikeRepository bikeRepository, BrandService brandService,
+                       CategoryService categoryService, GroupsetService groupsetService
+            , BikeRequestValidator bikeRequestValidator) {
         this.bikeRepository = bikeRepository;
         this.brandService = brandService;
         this.categoryService = categoryService;
         this.groupsetService = groupsetService;
+        this.bikeRequestValidator = bikeRequestValidator;
     }
 
     public List<Bike> findAll() {
@@ -41,20 +50,31 @@ public class BikeService {
         return bikeRepository.findBikesByCategoryNameAndYear(categoryName, year);
     }
 
-  /*  public Bike add(BikeDto bikeDto) {
+    public Bike add(BikeRequest bikeRequest) throws MethodArgumentNotValidException, NoSuchMethodException {
+
+        validateBikeRequest(bikeRequest);
 
         Bike newBike = new Bike();
-
-        newBike.setName(bikeDto.getName());
-        newBike.setYear(bikeDto.getYear());
-        newBike.setPrice(bikeDto.getPrice());
-        newBike.setBrand(brandService.findById(bikeDto.getBrandId()));
-        newBike.setCategory(categoryService.findById(bikeDto.getCategoryId()));
-        newBike.setGroupset(groupsetService.findById(bikeDto.getGroupsetId()));
-        newBike.setBrakesType(bikeDto.getBrakesType());
-        newBike.setFrameMaterial(bikeDto.getFrameMaterial());
-        newBike.setSuspensionType(bikeDto.getSuspensionType());
+        newBike.setName(bikeRequest.getName());
+        newBike.setYear(bikeRequest.getYear());
+        newBike.setPrice(bikeRequest.getPrice());
+        newBike.setBrand(brandService.findById(bikeRequest.getBrandId()));
+        newBike.setCategory(categoryService.findById(bikeRequest.getCategoryId()));
+        newBike.setGroupset(groupsetService.findById(bikeRequest.getGroupsetId()));
+        newBike.setBrakesType(bikeRequest.getBrakesType());
+        newBike.setFrameMaterial(bikeRequest.getFrameMaterial());
+        newBike.setSuspensionType(bikeRequest.getSuspensionType());
 
         return bikeRepository.save(newBike);
-    }*/
+    }
+
+    private void validateBikeRequest(BikeRequest bikeRequest) throws NoSuchMethodException, MethodArgumentNotValidException {
+        BindingResult bindingResult = new BeanPropertyBindingResult(bikeRequest, "bikeRequest");
+        bikeRequestValidator.validate(bikeRequest, bindingResult);
+        if (bindingResult.hasErrors()) {
+            throw new MethodArgumentNotValidException(
+                    new MethodParameter(this.getClass().getDeclaredMethod("validateBikeRequest", BikeRequest.class), 0),
+                    bindingResult);
+        }
+    }
 }

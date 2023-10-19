@@ -5,6 +5,8 @@ import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.GroupsetRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GroupsetService {
 
@@ -16,5 +18,9 @@ public class GroupsetService {
 
     public Groupset findById(Long groupsetId) {
         return groupsetRepository.findById(groupsetId).orElseThrow(() -> new ResourceNotFoundException("Could not find groupset with id=" + groupsetId));
+    }
+
+    public List<Groupset> findALl() {
+       return groupsetRepository.findAll();
     }
 }

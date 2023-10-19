@@ -1,8 +1,7 @@
-package org.pedalhub.pedalhubbackend.entities.dto;
+package org.pedalhub.pedalhubbackend.entities.dto.bikedto;
 
-public class BikeResponse {
+public class BikeRequest {
 
-    private Long id;
     private String name;
     private Integer year;
     private Double price;
@@ -13,15 +12,20 @@ public class BikeResponse {
     private Long categoryId;
     private Long groupsetId;
 
-    public BikeResponse() {
+
+    public BikeRequest() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public BikeRequest(String name, Integer year, Double price, String frameMaterial, String brakesType, String suspensionType, Long brandId, Long categoryId, Long groupsetId) {
+        this.name = name;
+        this.year = year;
+        this.price = price;
+        this.frameMaterial = frameMaterial;
+        this.brakesType = brakesType;
+        this.suspensionType = suspensionType;
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.groupsetId = groupsetId;
     }
 
     public String getName() {
