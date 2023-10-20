@@ -3,10 +3,7 @@ package org.pedalhub.pedalhubbackend.controllers;
 import org.pedalhub.pedalhubbackend.entities.Groupset;
 import org.pedalhub.pedalhubbackend.services.GroupsetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +27,10 @@ public class GroupsetController {
     public Groupset findById(@PathVariable(name = "id") Long id) {
         return groupsetService.findById(id);
     }
+
+    @PostMapping("")
+    public Groupset addGroupset(@RequestBody Groupset groupset) {
+        return groupsetService.addGroupset(groupset);
+    }
+
 }

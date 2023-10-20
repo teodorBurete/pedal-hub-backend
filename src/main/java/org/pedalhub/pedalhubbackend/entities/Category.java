@@ -1,8 +1,8 @@
 package org.pedalhub.pedalhubbackend.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import org.pedalhub.pedalhubbackend.entities.jsonviews.View;
 
 import java.util.List;
 
@@ -11,21 +11,36 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView({View.CategoryView.List.class, View.CategoryView.Single.class})
     private Long id;
     @Column
+    @JsonView({View.CategoryView.List.class, View.CategoryView.Single.class})
     private String name;
     @Column
+    @JsonView({View.CategoryView.Single.class})
     private String description;
+    @JsonBackReference(value = "childCategory-parentCategory")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parentCategory")
     private List<Category> childCategories;
     @ManyToOne
+    @JsonManagedReference(value = "childCategory-parentCategory")
     @JoinColumn(name = "parent_id")
+    @JsonView({View.CategoryView.Single.class})
     private Category parentCategory;
-    @JsonBackReference
+    @Column(name = "parent_id", insertable = false, updatable = false)
+    @JsonView(View.CategoryView.List.class)
+    private Long parentId;
+    @JsonBackReference(value = "category-bikes")
     @OneToMany(mappedBy = "category")
     private List<Bike> bikeList;
 
     public Category() {
+    }
+
+    public Category(String name, String description, Long parentId) {
+        this.name = name;
+        this.description = description;
+        this.parentId = parentId;
     }
 
     public Category(String name, String description) {
@@ -79,6 +94,14 @@ public class Category {
 
     public void setBikeList(List<Bike> bikeList) {
         this.bikeList = bikeList;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     @Override

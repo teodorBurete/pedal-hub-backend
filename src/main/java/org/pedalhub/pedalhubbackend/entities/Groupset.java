@@ -1,5 +1,6 @@
 package org.pedalhub.pedalhubbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.pedalhub.pedalhubbackend.entities.enums.groupset.GroupsetMake;
 import org.pedalhub.pedalhubbackend.entities.enums.groupset.GroupsetType;
@@ -17,6 +18,10 @@ public class Groupset {
     private String make;
     @Column
     private String type;
+    @Column
+    private String line;
+    @Column
+    private String model;
 
     public Groupset() {
     }
@@ -25,6 +30,14 @@ public class Groupset {
         this.name = name;
         this.make = make;
         this.type = type;
+    }
+
+    public Groupset(String name, String make, String type, String line, String model, String code) {
+        this.name = name;
+        this.make = make;
+        this.type = type;
+        this.line = line;
+        this.model = model;
     }
 
     public void setId(Long id) {
@@ -59,8 +72,24 @@ public class Groupset {
         this.type = type;
     }
 
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     @Override
-    public String   toString() {
+    public String toString() {
         return "Groupset{" +
                 "id=" + id +
                 ", name='" + name + '\'' +

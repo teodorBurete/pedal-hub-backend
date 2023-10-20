@@ -1,6 +1,8 @@
 package org.pedalhub.pedalhubbackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.pedalhub.pedalhubbackend.entities.enums.bike.BrakesType;
 import org.pedalhub.pedalhubbackend.entities.enums.bike.FrameMaterial;
@@ -24,10 +26,22 @@ public class Bike {
     private String brakesType;
     @Column
     private String suspensionType;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    @JoinColumn(name="brand_id")
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @JoinColumn(name = "brand_id")
     private Brand brand;
+
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    @Column(name = "brand_id", insertable = false, updatable = false)
+    private Long brandId;
     @ManyToOne
     private Category category;
     @ManyToOne

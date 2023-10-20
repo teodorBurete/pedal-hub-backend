@@ -8,6 +8,7 @@ import org.pedalhub.pedalhubbackend.utils.validators.BrandValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -38,6 +39,7 @@ public class BrandService {
         return brandRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find brand with id=" + id));
     }
 
+    @Transactional
     public Brand save(Brand newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
         this.validateBrand(newBrand);
         Brand b = new Brand();

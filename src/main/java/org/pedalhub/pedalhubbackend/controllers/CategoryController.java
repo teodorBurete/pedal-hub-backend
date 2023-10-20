@@ -1,13 +1,12 @@
 package org.pedalhub.pedalhubbackend.controllers;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.Category;
+import org.pedalhub.pedalhubbackend.entities.jsonviews.View;
 import org.pedalhub.pedalhubbackend.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,14 +24,21 @@ public class CategoryController {
     }
 
     @GetMapping()
+    @JsonView(View.CategoryView.List.class)
     public List<Category> findAll() {
         List<Category> categories = categoryService.findAll();
         return categories;
     }
 
     @GetMapping("/{id}")
+    @JsonView(View.CategoryView.Single.class)
+
     public Category getById(@PathVariable(value = "id") Long id) {
         return categoryService.findById(id);
     }
 
+    @PostMapping
+    public Category addCategory(@RequestBody Category newCategory) {
+        return categoryService.addCategory(newCategory);
+    }
 }

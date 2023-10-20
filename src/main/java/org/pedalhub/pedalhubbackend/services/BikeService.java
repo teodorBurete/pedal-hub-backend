@@ -8,6 +8,7 @@ import org.pedalhub.pedalhubbackend.utils.validators.BikeRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -50,6 +51,7 @@ public class BikeService {
         return bikeRepository.findBikesByCategoryNameAndYear(categoryName, year);
     }
 
+    @Transactional
     public Bike add(BikeRequest bikeRequest) throws MethodArgumentNotValidException, NoSuchMethodException {
 
         validateBikeRequest(bikeRequest);

@@ -4,6 +4,8 @@ import org.pedalhub.pedalhubbackend.entities.Groupset;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.GroupsetRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.util.List;
 
@@ -21,6 +23,12 @@ public class GroupsetService {
     }
 
     public List<Groupset> findALl() {
-       return groupsetRepository.findAll();
+        return groupsetRepository.findAll();
+    }
+    @Transactional
+    public Groupset addGroupset(Groupset newGroupset) {
+        if (newGroupset.getName().isEmpty() || newGroupset.getMake().isEmpty() || newGroupset.getType().isEmpty())
+            throw new IllegalArgumentException("invalid input");
+        return groupsetRepository.save(newGroupset);
     }
 }

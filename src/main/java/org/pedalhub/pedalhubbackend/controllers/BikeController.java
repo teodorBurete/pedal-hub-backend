@@ -1,6 +1,7 @@
 package org.pedalhub.pedalhubbackend.controllers;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.pedalhub.pedalhubbackend.entities.Bike;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeDto;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
@@ -32,9 +33,14 @@ public class BikeController {
         return bikes.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+/*    @GetMapping("/{id}")
     public BikeResponse getById(@PathVariable(value = "id") Long id) {
         return this.convertToResponse(bikeService.findById(id));
+    }*/
+
+    @GetMapping("/{id}")
+    public Bike getById(@PathVariable(value = "id") Long id) {
+        return (bikeService.findById(id));
     }
 
     @GetMapping("/brand/{brandName}")

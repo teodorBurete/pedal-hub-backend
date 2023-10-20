@@ -4,6 +4,7 @@ import org.pedalhub.pedalhubbackend.entities.Category;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,5 +24,19 @@ public class CategoryService {
 
     public List<Category> findAll() {
         return categoryRepository.findAll();
+    }
+
+    @Transactional
+    public Category addCategory(Category newCategory) {
+
+        Category addCategory = new Category();
+
+        if (newCategory.getParentId() != 0)
+            addCategory.setParentCategory(this.findById(newCategory.getParentId()));
+
+        addCategory.setName(newCategory.getName().toLowerCase().trim());
+        addCategory.setDescription(newCategory.getDescription().toLowerCase().trim());
+
+        return categoryRepository.save(addCategory);
     }
 }
