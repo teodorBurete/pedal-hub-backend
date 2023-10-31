@@ -8,6 +8,7 @@ import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeResponse;
 import org.pedalhub.pedalhubbackend.services.BikeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,11 @@ public class BikeController {
     }
 
     @GetMapping()
-    public List<BikeDto> findAll() {
-        List<Bike> bikes = bikeService.findAll();
-        return bikes.stream().map(this::convertToDto).collect(Collectors.toList());
+    public Page<Bike> findAll(@RequestParam(defaultValue = "0") Integer page,
+                              @RequestParam(defaultValue = "50") Integer size,
+                              @RequestParam(defaultValue = "id") String sortBy) {
+        Page<Bike> bikes = bikeService.findAll(page, size, sortBy);
+        return bikes;
     }
 
 /*    @GetMapping("/{id}")

@@ -7,6 +7,10 @@ import org.pedalhub.pedalhubbackend.repositories.BikeRepository;
 import org.pedalhub.pedalhubbackend.utils.validators.BikeRequestValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -37,6 +41,14 @@ public class BikeService {
 
     public List<Bike> findAll() {
         return bikeRepository.findAll();
+    }
+
+    public Page<Bike> findAll(Integer page, Integer size, String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        Page<Bike> pagedResult = bikeRepository.findAll(pageable);
+        return pagedResult;
+        //return pagedResult.getContent();
+
     }
 
     public Bike findById(Long id) {
@@ -79,4 +91,6 @@ public class BikeService {
                     bindingResult);
         }
     }
+
+
 }
