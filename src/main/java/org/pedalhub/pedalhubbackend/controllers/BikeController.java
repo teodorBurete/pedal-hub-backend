@@ -3,6 +3,7 @@ package org.pedalhub.pedalhubbackend.controllers;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.pedalhub.pedalhubbackend.entities.Bike;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.BikeSearchDto;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeDto;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeResponse;
@@ -34,6 +35,17 @@ public class BikeController {
                               @RequestParam(defaultValue = "id") String sortBy) {
         Page<Bike> bikes = bikeService.findAll(page, size, sortBy);
         return bikes;
+    }
+
+    @PostMapping("/search")
+    public Page<Bike> searchBikes(@RequestParam(defaultValue = "0") Integer page,
+                                  @RequestParam(defaultValue = "50") Integer size,
+                                  @RequestParam(defaultValue = "id") String sortBy,
+                                  @RequestBody BikeSearchDto bikeSearchDto) {
+
+        Page<Bike> bikes = bikeService.searchBikes(page,size,sortBy,bikeSearchDto);
+        return bikes;
+
     }
 
 /*    @GetMapping("/{id}")

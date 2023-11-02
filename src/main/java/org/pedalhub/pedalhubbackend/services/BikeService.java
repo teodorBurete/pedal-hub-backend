@@ -1,6 +1,10 @@
 package org.pedalhub.pedalhubbackend.services;
 
 import org.pedalhub.pedalhubbackend.entities.Bike;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.BikeSearchDto;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.SearchCriteria;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.jpa_specification.BikeSpecification;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.jpa_specification.BikeSpecificationBuilder;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.BikeRepository;
@@ -11,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -93,4 +98,13 @@ public class BikeService {
     }
 
 
+    public Page<Bike> searchBikes(Integer page, Integer size, String sortBy, BikeSearchDto bikeSearchDto) {
+        List<SearchCriteria> searchCriteriaList = bikeSearchDto.getSearchCriteriaList();
+        //  if (searchCriteriaList !=null)
+        //  searchCriteriaList.get(0).setDataOption("and");
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        Specification<Bike> spec = new BikeSpecificationBuilder(searchCriteriaList).build();
+        return bikeRepository.findAll(spec, pageable);
+
+    }
 }
