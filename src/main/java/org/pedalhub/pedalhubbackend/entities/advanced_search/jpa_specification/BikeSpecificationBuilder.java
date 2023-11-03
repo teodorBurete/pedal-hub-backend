@@ -4,14 +4,15 @@ import org.pedalhub.pedalhubbackend.entities.Bike;
 import org.pedalhub.pedalhubbackend.entities.advanced_search.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BikeSpecificationBuilder {
 
     private List<SearchCriteria> params;
 
-    public BikeSpecificationBuilder(List<SearchCriteria> params) {
-        this.params = params;
+    public BikeSpecificationBuilder() {
+        this.params = new ArrayList<>();
     }
 
     public final BikeSpecificationBuilder with(SearchCriteria searchCriteria) {

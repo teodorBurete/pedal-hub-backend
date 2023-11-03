@@ -8,6 +8,9 @@ import org.pedalhub.pedalhubbackend.entities.advanced_search.SearchCriteria;
 import org.pedalhub.pedalhubbackend.exceptions.IllegalSearchCriteriaException;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BikeSpecification implements Specification<Bike> {
 
     private SearchCriteria searchCriteria;
@@ -31,6 +34,59 @@ public class BikeSpecification implements Specification<Bike> {
             if (key.equals("brakestype")) return cb.equal(cb.lower(root.get("brakesType")), valueToSearch);
             if (key.equals("year")) return cb.equal(root.get("year"), valueToSearch);
             // if(key.equals("price")) return cb.equal(cb.lower(root.get("suspensionType")), valueToSearch);
+        }
+
+        if (operation.equals("in")) {
+
+            if(key.equals("brakestype")){
+                List<String> valuesToSearch;
+                try {
+                    valuesToSearch = (ArrayList<String>) searchCriteria.getValue();
+                    return cb.lower(root.get("brakesType")).in(valuesToSearch);
+                } catch (Exception e) {
+                    throw new IllegalSearchCriteriaException("values not allowed", searchCriteria);
+                }
+            }
+
+            if(key.equals("framematerial")){
+                List<String> valuesToSearch;
+                try {
+                    valuesToSearch = (ArrayList<String>) searchCriteria.getValue();
+                    return cb.lower(root.get("frameMaterial")).in(valuesToSearch);
+                } catch (Exception e) {
+                    throw new IllegalSearchCriteriaException("values not allowed", searchCriteria);
+                }
+            }
+            if (key.equals("brand")) {
+                List<String> valuesToSearch;
+                try {
+                    valuesToSearch = (ArrayList<String>) searchCriteria.getValue();
+                    return cb.lower(brandJoin(root).get("name")).in(valuesToSearch);
+                } catch (Exception e) {
+                    throw new IllegalSearchCriteriaException("values not allowed", searchCriteria);
+                }
+            }
+
+            if (key.equals("year")) {
+                List<Integer> valuesToSearch;
+                try {
+                    valuesToSearch = (ArrayList<Integer>) searchCriteria.getValue();
+                    return root.get("year").in(valuesToSearch);
+                } catch (Exception e) {
+                    throw new IllegalSearchCriteriaException("values not allowed", searchCriteria);
+
+                }
+            }
+            if (key.equals("category")) {
+                List<String> valuesToSearch;
+                try {
+                    valuesToSearch = (ArrayList<String>) searchCriteria.getValue();
+                    return cb.lower(categoryJoin(root).get("name")).in(valuesToSearch);
+                } catch (Exception e) {
+                    throw new IllegalSearchCriteriaException("values not allowed", searchCriteria);
+
+                }
+            }
         }
 
         if (operation.equals("le")) {

@@ -103,7 +103,13 @@ public class BikeService {
         //  if (searchCriteriaList !=null)
         //  searchCriteriaList.get(0).setDataOption("and");
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        Specification<Bike> spec = new BikeSpecificationBuilder(searchCriteriaList).build();
+        BikeSpecificationBuilder builder = new BikeSpecificationBuilder();
+        if (searchCriteriaList != null) {
+            searchCriteriaList.forEach(x -> {
+                builder.with(x);
+            });
+        }
+        Specification<Bike> spec = builder.build();
         return bikeRepository.findAll(spec, pageable);
 
     }

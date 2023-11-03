@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
         response.put("isSuccess", false);
         response.put("data", null);
         response.put("status", status);
-        response.put("message", "search criteria invalid");
+        response.put("message", ex.getMessage());
         response.put("searchCriteria", ex.getSearchCriteria());
         return new ResponseEntity<>(response, status);
     }
