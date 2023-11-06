@@ -32,5 +32,4 @@ build/
 .vscode/
 
 ### CUSTOM ###
-src/main/java/org/pedalhub/pedalhubbackend/playground
 src/main/resources/application-dev.properties
