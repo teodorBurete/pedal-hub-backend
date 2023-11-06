@@ -1,6 +1,6 @@
 package org.pedalhub.pedalhubbackend.exceptions;
 
-import org.pedalhub.pedalhubbackend.entities.advanced_search.SearchCriteria;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.SearchCriteria;
 
 public class IllegalSearchCriteriaException extends RuntimeException {
 

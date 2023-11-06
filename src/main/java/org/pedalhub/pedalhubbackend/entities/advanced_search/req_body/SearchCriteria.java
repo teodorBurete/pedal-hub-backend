@@ -1,4 +1,4 @@
-package org.pedalhub.pedalhubbackend.entities.advanced_search;
+package org.pedalhub.pedalhubbackend.entities.advanced_search.req_body;
 
 public class SearchCriteria {
 

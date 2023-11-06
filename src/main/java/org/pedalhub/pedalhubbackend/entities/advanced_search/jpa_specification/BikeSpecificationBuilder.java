@@ -1,7 +1,7 @@
 package org.pedalhub.pedalhubbackend.entities.advanced_search.jpa_specification;
 
 import org.pedalhub.pedalhubbackend.entities.Bike;
-import org.pedalhub.pedalhubbackend.entities.advanced_search.SearchCriteria;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;

@@ -4,7 +4,8 @@ import jakarta.persistence.criteria.*;
 import org.pedalhub.pedalhubbackend.entities.Bike;
 import org.pedalhub.pedalhubbackend.entities.Brand;
 import org.pedalhub.pedalhubbackend.entities.Category;
-import org.pedalhub.pedalhubbackend.entities.advanced_search.SearchCriteria;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.SearchCriteria;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.enums.SearchOperation;
 import org.pedalhub.pedalhubbackend.exceptions.IllegalSearchCriteriaException;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -25,7 +26,7 @@ public class BikeSpecification implements Specification<Bike> {
         String key = searchCriteria.getFilterKey().toLowerCase();
         String operation = searchCriteria.getOperation().toLowerCase();
 
-        if (operation.equals("eq")) {
+        if (operation.equals(SearchOperation.EQUAL.getKey())) {
             String valueToSearch = searchCriteria.getValue().toString().toLowerCase();
 
             if (key.equals("brand")) return cb.equal(cb.lower(brandJoin(root).get("name")), valueToSearch);
@@ -36,7 +37,7 @@ public class BikeSpecification implements Specification<Bike> {
             // if(key.equals("price")) return cb.equal(cb.lower(root.get("suspensionType")), valueToSearch);
         }
 
-        if (operation.equals("in")) {
+        if (operation.equals(SearchOperation.IN.getKey())) {
 
             if(key.equals("brakestype")){
                 List<String> valuesToSearch;
@@ -89,12 +90,12 @@ public class BikeSpecification implements Specification<Bike> {
             }
         }
 
-        if (operation.equals("le")) {
+        if (operation.equals(SearchOperation.LESS_OR_EQUAL.getKey())) {
             if (key.equals("price"))
                 return cb.le(root.get("price"), Double.valueOf(searchCriteria.getValue().toString()));
         }
 
-        if (operation.equals("ge")) {
+        if (operation.equals(SearchOperation.GREATER_OR_EQUAL.getKey())) {
             if (key.equals("price"))
                 return cb.ge(root.get("price"), Double.valueOf(searchCriteria.getValue().toString()));
         }

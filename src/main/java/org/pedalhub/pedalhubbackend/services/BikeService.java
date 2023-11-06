@@ -1,9 +1,8 @@
 package org.pedalhub.pedalhubbackend.services;
 
 import org.pedalhub.pedalhubbackend.entities.Bike;
-import org.pedalhub.pedalhubbackend.entities.advanced_search.BikeSearchDto;
-import org.pedalhub.pedalhubbackend.entities.advanced_search.SearchCriteria;
-import org.pedalhub.pedalhubbackend.entities.advanced_search.jpa_specification.BikeSpecification;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.BikeSearchDto;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.SearchCriteria;
 import org.pedalhub.pedalhubbackend.entities.advanced_search.jpa_specification.BikeSpecificationBuilder;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;

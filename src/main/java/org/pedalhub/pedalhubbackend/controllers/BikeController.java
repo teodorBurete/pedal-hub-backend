@@ -1,9 +1,8 @@
 package org.pedalhub.pedalhubbackend.controllers;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.pedalhub.pedalhubbackend.entities.Bike;
-import org.pedalhub.pedalhubbackend.entities.advanced_search.BikeSearchDto;
+import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.BikeSearchDto;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeDto;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
 import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeResponse;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/bikes")
