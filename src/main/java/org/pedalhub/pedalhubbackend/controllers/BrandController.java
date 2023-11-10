@@ -37,7 +37,7 @@ public class BrandController {
     }
 
     @PostMapping
-    public Brand newBrand(@RequestBody Brand newBrand) throws MethodArgumentNotValidException, NoSuchMethodException {
+    public Brand newBrand(@RequestBody BrandDto newBrand) throws MethodArgumentNotValidException, NoSuchMethodException {
         return brandService.save(newBrand);
     }
 

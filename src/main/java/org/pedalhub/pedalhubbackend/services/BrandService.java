@@ -2,6 +2,7 @@ package org.pedalhub.pedalhubbackend.services;
 
 import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.Brand;
+import org.pedalhub.pedalhubbackend.entities.dto.brabddto.BrandDto;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.BrandRepository;
 import org.pedalhub.pedalhubbackend.utils.validators.BrandValidator;
@@ -40,24 +41,23 @@ public class BrandService {
     }
 
     @Transactional
-    public Brand save(Brand newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
+    public Brand save(BrandDto newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
         this.validateBrand(newBrand);
         Brand b = new Brand();
         b.setName(newBrand.getName().toLowerCase());
         b.setDescription(newBrand.getDescription().toLowerCase());
-        b.setCountry(b.getCountry().toLowerCase());
+        b.setCountry(newBrand.getCountry().toLowerCase());
 
-        return null;
-
-
+        brandRepository.save(b);
+        return b;
     }
 
-    private void validateBrand(Brand newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
+    private void validateBrand(BrandDto newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
         BindingResult bindingResult = new BeanPropertyBindingResult(newBrand, "newBrand");
         brandValidator.validate(newBrand, bindingResult);
         if (bindingResult.hasErrors()) {
             throw new MethodArgumentNotValidException(
-                    new MethodParameter(this.getClass().getDeclaredMethod("validateBrand", Brand.class), 0),
+                    new MethodParameter(this.getClass().getDeclaredMethod("validateBrand", BrandDto.class), 0),
                     bindingResult);
         }
     }
