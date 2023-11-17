@@ -2,6 +2,7 @@ package org.pedalhub.pedalhubbackend.entities;
 
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+import org.pedalhub.pedalhubbackend.entities.bikes.Bike;
 import org.pedalhub.pedalhubbackend.entities.jsonviews.View;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package org.pedalhub.pedalhubbackend.repositories;
 
-import org.pedalhub.pedalhubbackend.entities.Bike;
+import org.pedalhub.pedalhubbackend.entities.bikes.Bike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

@@ -1,8 +1,8 @@
 package org.pedalhub.pedalhubbackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.pedalhub.pedalhubbackend.entities.bikes.Bike;
 
 import java.util.List;
 
