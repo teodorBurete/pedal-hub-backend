@@ -11,6 +11,7 @@ import org.pedalhub.pedalhubbackend.entities.enums.bike.SuspensionType;
 @Entity
 @Table(name = "bikes")
 public class Bike {
+    //this is a fucking testaaaaaaaaaaa
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
