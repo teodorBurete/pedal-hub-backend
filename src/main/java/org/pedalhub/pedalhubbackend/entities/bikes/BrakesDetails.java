@@ -17,6 +17,11 @@ public class BrakesDetails {
     public BrakesDetails() {
     }
 
+    public BrakesDetails(String brakes, String brakeLevers) {
+        this.brakes = brakes;
+        this.brakeLevers = brakeLevers;
+    }
+
     public String getBrakes() {
         return brakes;
     }

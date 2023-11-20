@@ -28,6 +28,16 @@ public class DrivetrainDetails {
     public DrivetrainDetails() {
     }
 
+    public DrivetrainDetails(String rearDerailleur, String frontDerailleur, String shiftLevers, String cassette, String crank, String bottomBracket, String chain) {
+        this.rearDerailleur = rearDerailleur;
+        this.frontDerailleur = frontDerailleur;
+        this.shiftLevers = shiftLevers;
+        this.cassette = cassette;
+        this.crank = crank;
+        this.bottomBracket = bottomBracket;
+        this.chain = chain;
+    }
+
     public Bike getBike() {
         return bike;
     }

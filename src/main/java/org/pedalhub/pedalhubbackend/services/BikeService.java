@@ -1,10 +1,10 @@
 package org.pedalhub.pedalhubbackend.services;
 
-import org.pedalhub.pedalhubbackend.entities.bikes.Bike;
+import org.pedalhub.pedalhubbackend.entities.bikes.*;
 import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.BikeSearchDto;
 import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.SearchCriteria;
 import org.pedalhub.pedalhubbackend.entities.advanced_search.jpa_specification.BikeSpecificationBuilder;
-import org.pedalhub.pedalhubbackend.entities.dto.bikedto.BikeRequest;
+import org.pedalhub.pedalhubbackend.entities.bikes.dto.BikeRequest;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.BikeRepository;
 import org.pedalhub.pedalhubbackend.utils.validators.BikeRequestValidator;
@@ -21,6 +21,7 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import java.awt.*;
 import java.util.List;
 
 @Service
@@ -70,18 +71,63 @@ public class BikeService {
     @Transactional
     public Bike add(BikeRequest bikeRequest) throws MethodArgumentNotValidException, NoSuchMethodException {
 
-        validateBikeRequest(bikeRequest);
+        // validateBikeRequest(bikeRequest);
 
         Bike newBike = new Bike();
+
         newBike.setName(bikeRequest.getName());
         newBike.setYear(bikeRequest.getYear());
         newBike.setPrice(bikeRequest.getPrice());
+        newBike.setFrameMaterial(bikeRequest.getFrameMaterial());
+        newBike.setWheelSize(bikeRequest.getWheelSize());
+        newBike.setGroupset(bikeRequest.getGroupset());
+        newBike.setDrivetrain(bikeRequest.getDrivetrain());
+        newBike.setBrakesType(bikeRequest.getBrakesType());
+        newBike.setSuspensionType(bikeRequest.getSuspensionType());
+        newBike.setFork(bikeRequest.getFork());
+        newBike.setFrontTravel(bikeRequest.getFrontTravel());
+        newBike.setRearTravel(bikeRequest.getRearTravel());
+
         newBike.setBrand(brandService.findById(bikeRequest.getBrandId()));
         newBike.setCategory(categoryService.findById(bikeRequest.getCategoryId()));
-        newBike.setGroupset(groupsetService.findById(bikeRequest.getGroupsetId()));
-        newBike.setBrakesType(bikeRequest.getBrakesType());
-        newBike.setFrameMaterial(bikeRequest.getFrameMaterial());
-        newBike.setSuspensionType(bikeRequest.getSuspensionType());
+
+        newBike.setDrivetrainDetails(
+                new DrivetrainDetails(bikeRequest.getRearDerailleur(),
+                        bikeRequest.getFrontDerailleur(),
+                        bikeRequest.getShiftLevers(),
+                        bikeRequest.getCassette(),
+                        bikeRequest.getCrank(),
+                        bikeRequest.getBottomBracket(),
+                        bikeRequest.getChain())
+        );
+
+        newBike.setFrameDetails(
+                new FrameDetails(bikeRequest.getFrame(),
+                        bikeRequest.getFork(),
+                        bikeRequest.getRearSuspension())
+        );
+
+        newBike.setBrakesDetails(
+                new BrakesDetails(bikeRequest.getBrakes(),
+                        bikeRequest.getBrakeLevers()
+                ));
+
+        newBike.setCockpitDetails(
+                new CockpitDetails(bikeRequest.getStem(),
+                        bikeRequest.getHandlebar()));
+
+        newBike.setSeatDetails(
+                new SeatDetails(bikeRequest.getSaddle(),
+                        bikeRequest.getSeatPost())
+        );
+
+        newBike.setWheelsDetails(
+                new WheelsDetails(bikeRequest.getFrontHub(),
+                        bikeRequest.getRearHub(),
+                        bikeRequest.getRims(),
+                        bikeRequest.getSpokes(),
+                        bikeRequest.getTires())
+        );
 
         return bikeRepository.save(newBike);
     }

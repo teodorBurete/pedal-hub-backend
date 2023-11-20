@@ -21,7 +21,16 @@ public class WheelsDetails {
     @Column
     private String tires;
 
+
     public WheelsDetails() {
+    }
+
+    public WheelsDetails(String frontHub, String rearHub, String rims, String spokes, String tires) {
+        this.frontHub = frontHub;
+        this.rearHub = rearHub;
+        this.rims = rims;
+        this.spokes = spokes;
+        this.tires = tires;
     }
 
     public Bike getBike() {

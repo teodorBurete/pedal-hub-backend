@@ -19,6 +19,12 @@ public class FrameDetails {
     public FrameDetails() {
     }
 
+    public FrameDetails(String frame, String fork, String rearSuspension) {
+        this.frame = frame;
+        this.fork = fork;
+        this.rearSuspension = rearSuspension;
+    }
+
     public Bike getBike() {
         return bike;
     }

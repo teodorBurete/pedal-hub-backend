@@ -17,6 +17,11 @@ public class SeatDetails {
     public SeatDetails() {
     }
 
+    public SeatDetails(String saddle, String seatPost) {
+        this.saddle = saddle;
+        this.seatPost = seatPost;
+    }
+
     public String getSaddle() {
         return saddle;
     }

@@ -17,6 +17,11 @@ public class CockpitDetails {
     public CockpitDetails() {
     }
 
+    public CockpitDetails(String stem, String handlebar) {
+        this.stem = stem;
+        this.handlebar = handlebar;
+    }
+
     public String getStem() {
         return stem;
     }
