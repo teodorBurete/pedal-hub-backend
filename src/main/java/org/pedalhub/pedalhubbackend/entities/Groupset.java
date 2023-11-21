@@ -2,9 +2,6 @@ package org.pedalhub.pedalhubbackend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.pedalhub.pedalhubbackend.entities.enums.groupset.GroupsetMake;
-import org.pedalhub.pedalhubbackend.entities.enums.groupset.GroupsetType;
-
 @Entity
 @Table(name = "groupsets")
 public class Groupset {

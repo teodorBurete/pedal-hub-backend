@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.pedalhub.pedalhubbackend.entities.Brand;
-import org.pedalhub.pedalhubbackend.entities.Category;
+import org.pedalhub.pedalhubbackend.entities.categories.Category;
 
 @Entity
 @Table(name = "bikes")
@@ -33,9 +33,9 @@ public class Bike {
     @Column
     private String fork;
     @Column
-    private Double frontTravel;
+    private String frontTravel;
     @Column
-    private Double rearTravel;
+    private String rearTravel;
     @ManyToOne
     private Category category;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "bike")
@@ -148,19 +148,19 @@ public class Bike {
         this.fork = fork;
     }
 
-    public Double getFrontTravel() {
+    public String getFrontTravel() {
         return frontTravel;
     }
 
-    public void setFrontTravel(Double frontTravel) {
+    public void setFrontTravel(String frontTravel) {
         this.frontTravel = frontTravel;
     }
 
-    public Double getRearTravel() {
+    public String getRearTravel() {
         return rearTravel;
     }
 
-    public void setRearTravel(Double rearTravel) {
+    public void setRearTravel(String rearTravel) {
         this.rearTravel = rearTravel;
     }
 

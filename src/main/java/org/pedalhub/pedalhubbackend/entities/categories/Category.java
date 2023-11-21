@@ -1,4 +1,4 @@
-package org.pedalhub.pedalhubbackend.entities;
+package org.pedalhub.pedalhubbackend.entities.categories;
 
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;

@@ -3,7 +3,7 @@ package org.pedalhub.pedalhubbackend.entities.advanced_search.jpa_specification;
 import jakarta.persistence.criteria.*;
 import org.pedalhub.pedalhubbackend.entities.bikes.Bike;
 import org.pedalhub.pedalhubbackend.entities.Brand;
-import org.pedalhub.pedalhubbackend.entities.Category;
+import org.pedalhub.pedalhubbackend.entities.categories.Category;
 import org.pedalhub.pedalhubbackend.entities.advanced_search.req_body.SearchCriteria;
 import org.pedalhub.pedalhubbackend.entities.advanced_search.enums.SearchOperation;
 import org.pedalhub.pedalhubbackend.exceptions.IllegalSearchCriteriaException;

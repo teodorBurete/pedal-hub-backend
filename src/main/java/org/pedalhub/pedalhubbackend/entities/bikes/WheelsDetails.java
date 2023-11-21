@@ -1,5 +1,6 @@
 package org.pedalhub.pedalhubbackend.entities.bikes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,24 +9,26 @@ public class WheelsDetails {
     @Id
     @OneToOne
     @JoinColumn(name = "id")
+    @JsonIgnore
     private Bike bike;
 
-    @Column
+    @Column(length = 900)
     private String frontHub;
-    @Column
+    @Column(length = 900)
     private String rearHub;
-    @Column
+    @Column(length = 900)
     private String rims;
-    @Column
+    @Column(length = 900)
     private String spokes;
-    @Column
+    @Column(length = 900)
     private String tires;
 
 
     public WheelsDetails() {
     }
 
-    public WheelsDetails(String frontHub, String rearHub, String rims, String spokes, String tires) {
+    public WheelsDetails(Bike bike, String frontHub, String rearHub, String rims, String spokes, String tires) {
+        this.bike = bike;
         this.frontHub = frontHub;
         this.rearHub = rearHub;
         this.rims = rims;

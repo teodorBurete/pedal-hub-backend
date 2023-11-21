@@ -1,6 +1,7 @@
 package org.pedalhub.pedalhubbackend.services;
 
-import org.pedalhub.pedalhubbackend.entities.Category;
+import org.pedalhub.pedalhubbackend.entities.categories.Category;
+import org.pedalhub.pedalhubbackend.entities.categories.dto.CategoryRequest;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class CategoryService {
     }
 
     @Transactional
-    public Category addCategory(Category newCategory) {
+    public Category addCategory(CategoryRequest newCategory) {
 
         Category addCategory = new Category();
 

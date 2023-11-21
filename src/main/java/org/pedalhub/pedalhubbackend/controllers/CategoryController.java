@@ -2,7 +2,8 @@ package org.pedalhub.pedalhubbackend.controllers;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.modelmapper.ModelMapper;
-import org.pedalhub.pedalhubbackend.entities.Category;
+import org.pedalhub.pedalhubbackend.entities.categories.Category;
+import org.pedalhub.pedalhubbackend.entities.categories.dto.CategoryRequest;
 import org.pedalhub.pedalhubbackend.entities.jsonviews.View;
 import org.pedalhub.pedalhubbackend.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category addCategory(@RequestBody Category newCategory) {
+    public Category addCategory(@RequestBody CategoryRequest newCategory) {
         return categoryService.addCategory(newCategory);
     }
 }

@@ -1,9 +1,5 @@
 package org.pedalhub.pedalhubbackend.entities.bikes.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import org.pedalhub.pedalhubbackend.entities.Category;
-
 public class BikeRequest {
 
     //BIKE
@@ -17,8 +13,8 @@ public class BikeRequest {
     private String brakesType;
     private String suspensionType;
     private String fork_short;
-    private Double frontTravel;
-    private Double rearTravel;
+    private String frontTravel;
+    private String rearTravel;
     private String category;
     private Long brandId;
     private Long categoryId;
@@ -155,19 +151,19 @@ public class BikeRequest {
         this.fork_short = fork_short;
     }
 
-    public Double getFrontTravel() {
+    public String getFrontTravel() {
         return frontTravel;
     }
 
-    public void setFrontTravel(Double frontTravel) {
+    public void setFrontTravel(String frontTravel) {
         this.frontTravel = frontTravel;
     }
 
-    public Double getRearTravel() {
+    public String getRearTravel() {
         return rearTravel;
     }
 
-    public void setRearTravel(Double rearTravel) {
+    public void setRearTravel(String rearTravel) {
         this.rearTravel = rearTravel;
     }
 
