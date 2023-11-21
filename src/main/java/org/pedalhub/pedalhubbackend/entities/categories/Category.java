@@ -33,6 +33,7 @@ public class Category {
     private Long parentId;
     @JsonBackReference(value = "category-bikes")
     @OneToMany(mappedBy = "category")
+    @JsonIgnore
     private List<Bike> bikeList;
 
     public Category() {

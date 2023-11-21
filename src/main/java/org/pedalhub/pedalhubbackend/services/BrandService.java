@@ -1,6 +1,4 @@
 package org.pedalhub.pedalhubbackend.services;
-
-import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.brands.Brand;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.BrandRepository;
@@ -22,7 +20,7 @@ public class BrandService {
     private BrandValidator brandValidator;
 
     @Autowired
-    public BrandService(BrandRepository brandRepository, ModelMapper modelMapper, BrandValidator brandValidator) {
+    public BrandService(BrandRepository brandRepository, BrandValidator brandValidator) {
         this.brandRepository = brandRepository;
         this.brandValidator = brandValidator;
     }
