@@ -1,6 +1,5 @@
 package org.pedalhub.pedalhubbackend.controllers;
 
-import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.brands.Brand;
 import org.pedalhub.pedalhubbackend.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @CrossOrigin
