@@ -1,8 +1,7 @@
 package org.pedalhub.pedalhubbackend.controllers;
 
 import org.modelmapper.ModelMapper;
-import org.pedalhub.pedalhubbackend.entities.Brand;
-import org.pedalhub.pedalhubbackend.entities.dto.brabddto.BrandDto;
+import org.pedalhub.pedalhubbackend.entities.brands.Brand;
 import org.pedalhub.pedalhubbackend.services.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,18 +16,15 @@ import java.util.stream.Collectors;
 public class BrandController {
 
     private BrandService brandService;
-    private ModelMapper modelMapper;
 
     @Autowired
-    public BrandController(BrandService brandService, ModelMapper modelMapper) {
+    public BrandController(BrandService brandService) {
         this.brandService = brandService;
-        this.modelMapper = modelMapper;
     }
 
     @GetMapping
-    public List<BrandDto> getAll() {
-        List<Brand> brands = brandService.findAll();
-        return brands.stream().map(this::converToDto).collect(Collectors.toList());
+    public List<Brand> getAll() {
+        return brandService.findAll();
     }
 
     @GetMapping("/{id}")
@@ -37,12 +33,8 @@ public class BrandController {
     }
 
     @PostMapping
-    public Brand newBrand(@RequestBody BrandDto newBrand) throws MethodArgumentNotValidException, NoSuchMethodException {
+    public Brand newBrand(@RequestBody Brand newBrand) throws MethodArgumentNotValidException, NoSuchMethodException {
         return brandService.save(newBrand);
     }
-
-    private BrandDto converToDto(Brand brand) {
-        BrandDto dto = modelMapper.map(brand, BrandDto.class);
-        return dto;
-    }
 }
+

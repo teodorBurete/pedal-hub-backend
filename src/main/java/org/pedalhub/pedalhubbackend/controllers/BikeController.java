@@ -27,8 +27,8 @@ public class BikeController {
     public Page<BikeResponse> findAll(@RequestParam(defaultValue = "0") Integer page,
                                       @RequestParam(defaultValue = "50") Integer size,
                                       @RequestParam(defaultValue = "id") String sortBy) {
-        Page<BikeResponse> bikes = bikeService.findAll(page, size, sortBy);
-        return bikes;
+
+        return bikeService.findAll(page, size, sortBy);
     }
 
     @PostMapping("/search")
@@ -37,8 +37,7 @@ public class BikeController {
                                           @RequestParam(defaultValue = "id") String sortBy,
                                           @RequestBody BikeSearchDto bikeSearchDto) {
 
-        Page<BikeResponse> bikes = bikeService.searchBikes(page, size, sortBy, bikeSearchDto);
-        return bikes;
+        return bikeService.searchBikes(page, size, sortBy, bikeSearchDto);
 
     }
 

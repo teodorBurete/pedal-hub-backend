@@ -3,7 +3,7 @@ package org.pedalhub.pedalhubbackend.entities.bikes;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.pedalhub.pedalhubbackend.entities.Brand;
+import org.pedalhub.pedalhubbackend.entities.brands.Brand;
 import org.pedalhub.pedalhubbackend.entities.categories.Category;
 
 @Entity

@@ -3,7 +3,7 @@ package org.pedalhub.pedalhubbackend.entities.categories;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.pedalhub.pedalhubbackend.entities.bikes.Bike;
-import org.pedalhub.pedalhubbackend.entities.jsonviews.View;
+import org.pedalhub.pedalhubbackend.entities.categories.jsonviews.View;
 
 import java.util.List;
 

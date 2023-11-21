@@ -31,19 +31,17 @@ public class BikeService {
     private BikeRepository bikeRepository;
     private BrandService brandService;
     private CategoryService categoryService;
-    private GroupsetService groupsetService;
     private BikeRequestValidator bikeRequestValidator;
 
     @Autowired
     public BikeService(BikeRepository bikeRepository, BrandService brandService,
-                       CategoryService categoryService, GroupsetService groupsetService
-            , BikeRequestValidator bikeRequestValidator) {
+                       CategoryService categoryService, BikeRequestValidator bikeRequestValidator) {
         this.bikeRepository = bikeRepository;
         this.brandService = brandService;
         this.categoryService = categoryService;
-        this.groupsetService = groupsetService;
         this.bikeRequestValidator = bikeRequestValidator;
     }
+
     public Page<BikeResponse> findAll(Integer page, Integer size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         Page<Bike> pagedResult = bikeRepository.findAll(pageable);

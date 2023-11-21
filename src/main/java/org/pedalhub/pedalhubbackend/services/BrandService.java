@@ -1,8 +1,7 @@
 package org.pedalhub.pedalhubbackend.services;
 
 import org.modelmapper.ModelMapper;
-import org.pedalhub.pedalhubbackend.entities.Brand;
-import org.pedalhub.pedalhubbackend.entities.dto.brabddto.BrandDto;
+import org.pedalhub.pedalhubbackend.entities.brands.Brand;
 import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.pedalhub.pedalhubbackend.repositories.BrandRepository;
 import org.pedalhub.pedalhubbackend.utils.validators.BrandValidator;
@@ -14,21 +13,17 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import javax.xml.validation.Validator;
 import java.util.List;
-import java.util.function.UnaryOperator;
 
 @Service
 public class BrandService {
 
     private BrandRepository brandRepository;
-    private ModelMapper modelMapper;
     private BrandValidator brandValidator;
 
     @Autowired
     public BrandService(BrandRepository brandRepository, ModelMapper modelMapper, BrandValidator brandValidator) {
         this.brandRepository = brandRepository;
-        this.modelMapper = modelMapper;
         this.brandValidator = brandValidator;
     }
 
@@ -41,7 +36,7 @@ public class BrandService {
     }
 
     @Transactional
-    public Brand save(BrandDto newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
+    public Brand save(Brand newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
         this.validateBrand(newBrand);
         Brand b = new Brand();
         b.setName(newBrand.getName().toLowerCase());
@@ -52,12 +47,12 @@ public class BrandService {
         return b;
     }
 
-    private void validateBrand(BrandDto newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
+    private void validateBrand(Brand newBrand) throws NoSuchMethodException, MethodArgumentNotValidException {
         BindingResult bindingResult = new BeanPropertyBindingResult(newBrand, "newBrand");
         brandValidator.validate(newBrand, bindingResult);
         if (bindingResult.hasErrors()) {
             throw new MethodArgumentNotValidException(
-                    new MethodParameter(this.getClass().getDeclaredMethod("validateBrand", BrandDto.class), 0),
+                    new MethodParameter(this.getClass().getDeclaredMethod("validateBrand", Brand.class), 0),
                     bindingResult);
         }
     }

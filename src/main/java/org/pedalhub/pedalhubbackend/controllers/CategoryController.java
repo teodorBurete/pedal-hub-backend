@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.modelmapper.ModelMapper;
 import org.pedalhub.pedalhubbackend.entities.categories.Category;
 import org.pedalhub.pedalhubbackend.entities.categories.dto.CategoryRequest;
-import org.pedalhub.pedalhubbackend.entities.jsonviews.View;
+import org.pedalhub.pedalhubbackend.entities.categories.jsonviews.View;
 import org.pedalhub.pedalhubbackend.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

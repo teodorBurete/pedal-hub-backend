@@ -1,6 +1,7 @@
-package org.pedalhub.pedalhubbackend.entities;
+package org.pedalhub.pedalhubbackend.entities.brands;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.pedalhub.pedalhubbackend.entities.bikes.Bike;
 
@@ -20,6 +21,7 @@ public class Brand {
     private String country;
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand")
+    @JsonIgnore
     private List<Bike> bikeList;
 
     public Brand() {

@@ -1,4 +1,4 @@
-package org.pedalhub.pedalhubbackend.entities.jsonviews;
+package org.pedalhub.pedalhubbackend.entities.categories.jsonviews;
 
 public class View {
 
