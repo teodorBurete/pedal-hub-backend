@@ -56,6 +56,7 @@ public class BikeService {
         bikeResponse.setPrice(bike.getPrice());
         bikeResponse.setBrandName(bike.getBrand().getName());
         bikeResponse.setCategory(bike.getCategory());
+        bikeResponse.setId(bike.getId());
 
         return bikeResponse;
     }
@@ -163,6 +164,11 @@ public class BikeService {
         Page<Bike> pagedResult = bikeRepository.findAll(spec, pageable);
         return pagedResult.map(this::convertToDto);
 
+    }
+    @Transactional
+    public void delete(Long id) {
+        Bike bike = findById(id);
+        bikeRepository.delete(bike);
     }
 
     /*    public List<Bike> findByBrandName(String brandName) {

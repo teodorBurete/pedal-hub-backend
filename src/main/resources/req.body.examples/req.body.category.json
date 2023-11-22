@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Mountain",
+    "description": "MTBs",
+    "parentId": 0
+  },
+  {
+    "name": "Road",
+    "description": "Road bikes",
+    "parentId":0
+  },
+  {
+    "name": "Endurance",
+    "description": "Endurance bikes",
+    "parentId":0
+  },
+  {
+    "name": "Race",
+    "description": "Race bikes",
+    "parentId": 3
+  }
+]

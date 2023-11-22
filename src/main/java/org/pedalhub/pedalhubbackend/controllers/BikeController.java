@@ -7,10 +7,12 @@ import org.pedalhub.pedalhubbackend.entities.bikes.dto.BikeResponse;
 import org.pedalhub.pedalhubbackend.services.BikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/bikes")
@@ -49,6 +51,16 @@ public class BikeController {
     @PostMapping
     public Bike addBike(@RequestBody BikeRequest bikeRequest) throws MethodArgumentNotValidException, NoSuchMethodException {
         return bikeService.add(bikeRequest);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteBike(@PathVariable(value = "id") Long id) {
+        bikeService.delete(id);
+        HashMap<String, Object> res = new HashMap<>();
+        res.put("message","accepted");
+        res.put("success", true);
+        res.put("status code",HttpStatus.OK);
+        return ResponseEntity.ok(res);
     }
 
         /*@GetMapping("/brand/{brandName}")

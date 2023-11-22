@@ -4,6 +4,7 @@ import org.pedalhub.pedalhubbackend.entities.categories.Category;
 
 public class BikeResponse {
 
+    private Long id;
     private String name;
     private Double price;
     private Integer year;
@@ -12,6 +13,14 @@ public class BikeResponse {
 
 
     public BikeResponse() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

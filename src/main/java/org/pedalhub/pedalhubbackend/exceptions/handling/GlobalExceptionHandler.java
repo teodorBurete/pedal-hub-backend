@@ -1,6 +1,7 @@
 package org.pedalhub.pedalhubbackend.exceptions.handling;
 
 import org.pedalhub.pedalhubbackend.exceptions.IllegalSearchCriteriaException;
+import org.pedalhub.pedalhubbackend.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler({MethodArgumentNotValidException.class, IllegalSearchCriteriaException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class, IllegalSearchCriteriaException.class, ResourceNotFoundException.class})
     public final ResponseEntity<Object> handleException(
             Exception ex, WebRequest request) {
         HttpHeaders headers = new HttpHeaders();
@@ -27,18 +28,22 @@ public class GlobalExceptionHandler {
         }
 
         if (ex instanceof IllegalSearchCriteriaException) {
-            return IllegalSearchCriteriaException(
+            return handleIllegalSearchCriteria(
                     (IllegalSearchCriteriaException) ex, headers,
                     HttpStatus.BAD_REQUEST, request);
+        }
+
+        if (ex instanceof ResourceNotFoundException) {
+            return handleResourceNotFoundException((ResourceNotFoundException) ex, headers, HttpStatus.NOT_FOUND, request);
         }
         return null;
 
     }
 
-    private ResponseEntity<Object> IllegalSearchCriteriaException(IllegalSearchCriteriaException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request) {
+    private ResponseEntity<Object> handleIllegalSearchCriteria(IllegalSearchCriteriaException ex,
+                                                               HttpHeaders headers,
+                                                               HttpStatus status,
+                                                               WebRequest request) {
 
         Map<String, Object> response = new HashMap<>();
         response.put("isSuccess", false);
@@ -49,6 +54,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, status);
     }
 
+    private ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex,
+                                                                   HttpHeaders headers,
+                                                                   HttpStatus status,
+                                                                   WebRequest request) {
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("isSuccess", false);
+        response.put("data", null);
+        response.put("status", status);
+        response.put("message", ex.getMessage());
+        return new ResponseEntity<>(response, status);
+    }
 
     private ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
