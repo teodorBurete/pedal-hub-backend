@@ -1,0 +1,149 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="teodor" id="1700670188984-1">
+        <createTable tableName="bikes">
+            <column name="price" type="DOUBLE"/>
+            <column name="year" type="INT"/>
+            <column name="brand_id" type="BIGINT"/>
+            <column name="category_id" type="BIGINT"/>
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="brakes_type" type="VARCHAR(255)"/>
+            <column name="drivetrain" type="VARCHAR(255)"/>
+            <column name="fork" type="VARCHAR(255)"/>
+            <column name="frame_material" type="VARCHAR(255)"/>
+            <column name="front_travel" type="VARCHAR(255)"/>
+            <column name="groupset" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="rear_travel" type="VARCHAR(255)"/>
+            <column name="suspension_type" type="VARCHAR(255)"/>
+            <column name="wheel_size" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-2">
+        <createTable tableName="brakes_details">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="brake_levers" type="VARCHAR(900)"/>
+            <column name="brakes" type="VARCHAR(900)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-3">
+        <createTable tableName="brands">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="country" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-4">
+        <createTable tableName="categories">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="parent_id" type="BIGINT"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-5">
+        <createTable tableName="cockpit_details">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="handlebar" type="VARCHAR(900)"/>
+            <column name="stem" type="VARCHAR(900)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-6">
+        <createTable tableName="drivetrain_details">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="bottom_bracket" type="VARCHAR(900)"/>
+            <column name="cassette" type="VARCHAR(900)"/>
+            <column name="chain" type="VARCHAR(900)"/>
+            <column name="crank" type="VARCHAR(900)"/>
+            <column name="front_derailleur" type="VARCHAR(900)"/>
+            <column name="rear_derailleur" type="VARCHAR(900)"/>
+            <column name="shift_levers" type="VARCHAR(900)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-7">
+        <createTable tableName="frame_details">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="fork" type="VARCHAR(900)"/>
+            <column name="frame" type="VARCHAR(900)"/>
+            <column name="rear_suspension" type="VARCHAR(900)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-8">
+        <createTable tableName="seat_details">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="saddle" type="VARCHAR(900)"/>
+            <column name="seat_post" type="VARCHAR(900)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-9">
+        <createTable tableName="wheels_details">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="front_hub" type="VARCHAR(900)"/>
+            <column name="rear_hub" type="VARCHAR(900)"/>
+            <column name="rims" type="VARCHAR(900)"/>
+            <column name="spokes" type="VARCHAR(900)"/>
+            <column name="tires" type="VARCHAR(900)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-10">
+        <createIndex indexName="FKiqb4f08rc5q6g87bdndnfbahe" tableName="bikes">
+            <column name="brand_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-11">
+        <createIndex indexName="FKos4mgl0aqqn17t8skb3eousq" tableName="bikes">
+            <column name="category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-12">
+        <createIndex indexName="FKsaok720gsu4u2wrgbk10b5n8d" tableName="categories">
+            <column name="parent_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-13">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="frame_details" constraintName="FK4y00lqyssl45525mgwmj2kl9r" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="bikes" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-14">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="seat_details" constraintName="FK7dpuflf3g07ypmwdtcnxqd47y" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="bikes" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-15">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="cockpit_details" constraintName="FKc64p7uu7jxd4p50ml4vcjtxlh" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="bikes" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-16">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="brakes_details" constraintName="FKcvmxbqu4q2r883j2d73uke0k4" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="bikes" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-17">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="wheels_details" constraintName="FKefx49lgy7khxc4gcs98lykkqa" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="bikes" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-18">
+        <addForeignKeyConstraint baseColumnNames="id" baseTableName="drivetrain_details" constraintName="FKg55jl4xlxiye4ox1p9u3bo8t5" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="bikes" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-19">
+        <addForeignKeyConstraint baseColumnNames="brand_id" baseTableName="bikes" constraintName="FKiqb4f08rc5q6g87bdndnfbahe" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="brands" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-20">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="bikes" constraintName="FKos4mgl0aqqn17t8skb3eousq" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="categories" validate="true"/>
+    </changeSet>
+    <changeSet author="teodor" id="1700670188984-21">
+        <addForeignKeyConstraint baseColumnNames="parent_id" baseTableName="categories" constraintName="FKsaok720gsu4u2wrgbk10b5n8d" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="id" referencedTableName="categories" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

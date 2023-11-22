@@ -1,7 +1,4 @@
 package org.pedalhub.pedalhubbackend.config;
-
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.pedalhub.pedalhubbackend.utils.validators.BikeRequestValidator;
 import org.pedalhub.pedalhubbackend.utils.validators.BrandValidator;
 import org.springframework.context.annotation.Bean;

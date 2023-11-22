@@ -15,6 +15,8 @@
     <description>pedal-hub-backend</description>
     <properties>
         <java.version>17</java.version>
+        <liquibase.propertyfile>liquibase/liquibase.properties</liquibase.propertyfile>
+        <liquibase.version>4.23.0</liquibase.version>
     </properties>
     <dependencies>
         <dependency>
@@ -30,12 +32,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
@@ -46,27 +42,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>4.23.0</version>
         </dependency>
-        <!--  <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>-->
-        <!--
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-test</artifactId>
-                    <scope>test</scope>
-                </dependency>
-        -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
@@ -77,16 +56,27 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.20.0</version>
                 <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <!-- Use the liquibase.properties file as the main source of configuration -->
+                    <propertyFileWillOverride>true</propertyFileWillOverride>
+                    <propertyFile>${liquibase.propertyfile}</propertyFile>
                 </configuration>
+                <dependencies>
+                    <!-- This ensures the required dependencies are available to the plugin in the classpath -->
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-data-jpa</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-web</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
